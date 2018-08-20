@@ -21,7 +21,7 @@ workspace 有两版：
 ```
 setp1: 先删除系统中原有的 docker（请谨慎，如果不想删原有的）
 -------------------------------------------------------------
-$ sudo yum remove docker \
+$ yum remove docker \
                   docker-client \
                   docker-client-latest \
                   docker-common \
@@ -35,23 +35,23 @@ $ sudo yum remove docker \
 
 setp2: 安装 docker-ce 的仓库
 -------------------------------------------------------------
-$ sudo yum install -y yum-utils \
+$ yum install -y yum-utils \
   device-mapper-persistent-data \
   lvm2
 
-$ sudo yum-config-manager \
+$ yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
 
 
 setp3: 安装 docker-ce
 -------------------------------------------------------------
-$ sudo yum install docker-ce
+$ yum install docker-ce
 
 
 setp4: 启动服务
 -------------------------------------------------------------
-$ sudo systemctl start docker
+$ systemctl start docker
 
 // 查看版本
 $ docker -v
@@ -59,9 +59,9 @@ $ docker -v
 
 setp5: 安装 docker-compose
 -------------------------------------------------------------
-$ sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+$ curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 
-$sudo chmod +x /usr/local/bin/docker-compose
+$ chmod +x /usr/local/bin/docker-compose
 
 // 查看版本
 $ docker-compose -v
@@ -76,6 +76,37 @@ https://docs.docker.com/compose/install/
 1. 先下载 `git clone https://github.com/Cart157/mydock.git`
 2. `cd mydock`
 3. `docker-compose up -d caddy pgsql redis`，因为 caddy 会依赖 `php-fpm`，所以 `php-fpm` 和 `workspace` 会被自动启动，`pgsql redis worker` 等请按需启动
+
+
+### 打开防火墙的端口
+
+应为有的服务的端口映射到了主机上，所以需要打开防火墙的端口，阿里云的话是设置“安全组策略”
+
+CentOS7: firewalld
+```
+// 永久打开 443 端口
+$ firewall-cmd --add-port=443/tcp --permanent
+
+// 使服务生效
+$ systemctl restart firewalld
+
+// 检查设置是否生效
+# iptables -L -n | grep 443
+```
+
+CentOS6: iptables
+```
+// 永久打开 443 端口
+$ iptables -A INPUT -p tcp –dport 443 -j ACCEPT
+
+// 使服务生效
+$ service iptables save
+$ service iptables restart
+
+// 检查设置是否生效
+# iptables -L -n | grep 443
+```
+
 
 ### TODO
 
