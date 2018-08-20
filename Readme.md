@@ -18,7 +18,7 @@ workspace 有两版：
 
 ### 用法：
 
-CentOS: 安装 docker-ce
+#### CentOS: 安装 docker-ce
 ```
 setp1: 先删除系统中原有的 docker（请谨慎，如果不想删原有的）
 -------------------------------------------------------------
@@ -48,10 +48,35 @@ $ sudo yum-config-manager \
 setp3: 安装 docker-ce
 -------------------------------------------------------------
 $ sudo yum install docker-ce
+
+
+setp4: 启动服务
+-------------------------------------------------------------
+$ sudo systemctl start docker
+
+// 查看版本
+$ docker -v
+
+
+setp5: 安装 docker-compose
+-------------------------------------------------------------
+$ sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+
+$sudo chmod +x /usr/local/bin/docker-compose
+
+// 查看版本
+$ docker-compose -v
 ```
 
-Ubuntu: 安装 docker-ce
+Ubuntu等其他系统，请参照官方教程吧<br>
+https://docs.docker.com/install/linux/docker-ce/ubuntu/<br>
+https://docs.docker.com/compose/install/
 
+#### 启动 mydock
+
+1. 先下载 `git clone https://github.com/Cart157/mydock.git`
+2. `cd mydock`
+3. `docker-compose up -d caddy pgsql redis`，因为 caddy 会依赖 `php-fpm`，所以 `php-fpm` 和 `workspace` 会被自动启动，`pgsql redis worker` 等请按需启动
 
 ### TODO
 
