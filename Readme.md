@@ -1,9 +1,9 @@
 # mycart的docker环境
 
 + 服务器：caddy
-+ 代码解释器：php （workspace, fpm, worker）
-+ 数据库： pgsql
-+ 内存数据库：redis
++ 代码解释器：php 7.1 （workspace, fpm, worker）
++ 数据库： pgsql 10.0
++ 内存数据库：redis 3.2
 
 
 ### 说明：为了极速部署，没有build，只有镜像
@@ -21,6 +21,8 @@
 5. 权限说明：php使用的官方镜像作为基础，使用 `www-data` 用户运行，gid和uid都是82，所以网站的根目录应该 `chown -R 82:82 path` path指的是网站的目录
 
 6. pm2 的配置文件，放在 www 下，可以配置多个站点
+
+7. 如果放在外网，**记得在 docker-compose.yml 里修改密码**，还有最好不要把 db 和 redis 的端口映射出去，通过 workspace 的 ssh 连接它们
 
 
 ### 用法：

@@ -94,7 +94,6 @@ services:
       restart: always
       environment:
         - REDIS_PASSWORD=mydock123!@#
-      command: redis-server /etc/redis/redis.conf
       volumes:
         - /data/.mydock/redis:/data
         - ./redis/conf:/etc/redis
