@@ -2,8 +2,10 @@
 
 + 服务器：caddy
 + 代码解释器：php 7.1 （workspace, fpm, worker）
-+ 数据库： pgsql 10.0
++ 数据库： pgsql 10.5
 + 内存数据库：redis 3.2
+
+以上全部使用 alpine 构建
 
 
 ### 说明：为了极速部署，没有build，只有镜像
