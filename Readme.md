@@ -80,31 +80,31 @@ https://docs.docker.com/compose/install/
 
 ### 打开防火墙的端口
 
-应为有的服务的端口映射到了主机上，所以需要打开防火墙的端口，阿里云的话是设置“安全组策略”
+因为有些服务的端口映射到了宿主机上（例如：workspace映射到2222），所以需要打开防火墙的端口，阿里云的话是设置“安全组策略”
 
 CentOS7: firewalld
 ```
-// 永久打开 443 端口
-$ firewall-cmd --add-port=443/tcp --permanent
+// 永久打开 2222 端口
+$ firewall-cmd --add-port=2222/tcp --permanent
 
 // 使服务生效
 $ systemctl restart firewalld
 
 // 检查设置是否生效
-# iptables -L -n | grep 443
+# iptables -L -n | grep 2222
 ```
 
 CentOS6: iptables
 ```
-// 永久打开 443 端口
-$ iptables -A INPUT -p tcp –dport 443 -j ACCEPT
+// 永久打开 2222 端口
+$ iptables -A INPUT -p tcp –dport 2222 -j ACCEPT
 
 // 使服务生效
 $ service iptables save
 $ service iptables restart
 
 // 检查设置是否生效
-# iptables -L -n | grep 443
+# iptables -L -n | grep 2222
 ```
 
 
