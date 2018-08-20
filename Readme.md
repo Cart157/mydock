@@ -96,10 +96,10 @@ $ systemctl restart firewalld
 
 CentOS6: iptables
 ```
-// 永久打开 2222 端口
-$ iptables -A INPUT -p tcp –dport 2222 -j ACCEPT
+// 打开 2222 端口
+$ iptables -A INPUT -p tcp --dport 2222 -j ACCEPT
 
-// 使服务生效
+// 保存规则（永久打开）
 $ service iptables save
 $ service iptables restart
 
