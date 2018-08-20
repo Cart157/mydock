@@ -54,9 +54,6 @@ services:
     #   restart: always
     #   environment:
     #     - MYSQL_ROOT_PASSWORD=mydock123!@#
-    #     - MYSQL_DATABASE=gitea
-    #     - MYSQL_USER=gitea
-    #     - MYSQL_PASSWORD=gitea
     #   volumes:
     #     - /data/.mydock/mysql:/var/lib/mysql
     #   networks:
