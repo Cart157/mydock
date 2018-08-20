@@ -17,6 +17,7 @@
 3. 保留 mariadb 和 mysql 给有需要的人
 
 4. 站点配置，在 `caddy/conf/vhost` 里，复制一份 gutfan.com.conf，改名字，改里面的域名，重启 caddy 使之生效
+
     网站都应该放在宿主机的 `/data/www` 下，用域名区分，`/data/www` 会被挂载到容器里，日志会被放在 `/data/logs` 里，持久化数据放在了 `/data/.mydock` 里
 
 5. 权限说明：php使用的官方镜像作为基础，使用 `www-data` 用户运行，gid和uid都是82，所以网站的根目录应该 `chown -R 82:82 path` path指的是网站的目录
