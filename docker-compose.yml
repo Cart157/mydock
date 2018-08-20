@@ -41,7 +41,10 @@ services:
         - /data/www:/var/www
         - /data/logs/pm2:/home/www-data/.pm2/logs
         - ./php-worker/conf/pm2process.yml:/var/www/pm2process.yml
+      ports:
+        - "2223:22"
       networks:
+        - frontend
         - backend
 
 
@@ -119,22 +122,9 @@ services:
 
 ### Certbot ##############################################
     certbot:
-      image: fanybook/certbot
+      image: registry.cn-beijing.aliyuncs.com/fanybook/certbot
       volumes:
         - ./certbot/letsencrypt/:/var/www/letsencrypt
       tty: true
       networks:
         - frontend
-
-
-### Gitea ################################################
-  gitea:
-    image: gitea/gitea:1.5
-    restart: always
-    volumes:
-      - /data/.mydock/gitea:/data
-    ports:
-      - "30000:3000"
-      - "22222:22"
-    # depends_on:
-    #   - postgres
