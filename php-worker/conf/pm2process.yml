@@ -1,0 +1,30 @@
+#
+# This file provides an application definition that can be used with
+# PM2 ("Production Process Manager").
+#
+# PM2 "allows you to keep applications alive forever, to reload them
+# without downtime and to facilitate common system admin tasks."
+#
+# Use this file by running it with PM2. For example:
+# $> pm2 start queue-work.pm2.yml
+#
+# Then you can use PM2 commands to manage the process:
+# $> pm2 restart "laravel-queue-worker"
+# $> pm2 status "laravel-queue-worker"
+# $> pm2 logs "laravel-queue-worker"
+#
+
+apps:
+  - name: laravel-gutfan-queue-worker
+    interpreter: php
+    script: artisan
+    exec_mode: fork
+    instances: 2
+    cwd: '/var/www/gutfan.com/web/'
+    watch:
+      - './app/Jobs/**'
+      - './.env'
+    args:
+      - queue:work
+      - --sleep=1
+      - --tries=3

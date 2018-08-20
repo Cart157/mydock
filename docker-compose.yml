@@ -1,0 +1,116 @@
+version: '3'
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+
+services:
+### Workspace Utilities ##################################
+    workspace:
+      image: registry.cn-beijing.aliyuncs.com/fanybook/workspace
+      restart: always
+      volumes:
+        - /data/www:/var/www
+        - ./workspace/crontab/www-data:/etc/crontabs/www-data
+      ports:
+        - "2222:22"
+      networks:
+        - frontend
+        - backend
+
+
+### PHP-FPM ##############################################
+    php-fpm:
+      image: registry.cn-beijing.aliyuncs.com/fanybook/php-fpm
+      restart: always
+      volumes:
+        - /data/www:/var/www
+      depends_on:
+        - workspace
+      networks:
+        - backend
+
+
+### PHP-Worker ##############################################
+    php-worker:
+      image: registry.cn-beijing.aliyuncs.com/fanybook/php-worker
+      restart: always
+      volumes:
+        - /data/www:/var/www
+        - /data/logs/pm2:/home/www-data/.pm2/logs
+        - ./php-worker/conf/pm2process.yml:/var/www/pm2process.yml
+      networks:
+        - backend
+
+
+### Mysql ##############################################
+    mysql:
+      image: mysql:5.7
+      environment:
+        - MYSQL_ROOT_PASSWORD=mydock123!@#
+        - MYSQL_DATABASE=gitea
+        - MYSQL_USER=gitea
+        - MYSQL_PASSWORD=gitea
+      restart: always
+      volumes:
+        - /data/.mydock/mysql:/var/lib/mysql
+      networks:
+        - backend
+
+
+### Redis ################################################
+    redis:
+      image: registry.cn-beijing.aliyuncs.com/fanybook/redis
+      restart: always
+      command: redis-server /etc/redis/redis.conf
+      volumes:
+        - /data/.mydock/redis:/data
+        - ./redis/conf:/etc/redis
+      ports:
+        - "6379:6379"
+      networks:
+        - backend
+
+
+### Caddy Server #########################################
+    caddy:
+      image: registry.cn-beijing.aliyuncs.com/fanybook/caddy
+      restart: always
+      volumes:
+        - /data/www:/var/www
+        - /data/logs/caddy:/var/log/caddy
+        - /data/.mydock/caddy:/root/.caddy
+        - ./caddy/conf:/etc/caddy
+      ports:
+        - "80:80"
+        - "443:443"
+      depends_on:
+        - php-fpm
+      networks:
+        - frontend
+        - backend
+
+
+### Certbot ##############################################
+    certbot:
+      image: fanybook/certbot
+      volumes:
+        - ./certbot/letsencrypt/:/var/www/letsencrypt
+      tty: true
+      networks:
+        - frontend
+
+
+### Gitea ################################################
+  gitea:
+    image: gitea/gitea:1.5
+    volumes:
+      - ./data/gitea:/data
+    ports:
+      - "30000:3000"
+      - "22222:22"
+    depends_on:
+      - db
+    restart: always
