@@ -12,6 +12,6 @@
 
 ## TODO
 
-<input type="checkbox"> 把 mysql 换成 alpine 版的 mariadb 10 （相当于 mysql 5.7）
-<input type="checkbox"> 把 pgsql 弄好
-<input type="checkbox"> 把 pm2 的 web 查看弄好
+<input type="checkbox" value="1"> 把 mysql 换成 alpine 版的 mariadb 10 （相当于 mysql 5.7）
+<input type="checkbox" value="1"> 把 pgsql 弄好
+<input type="checkbox" value="1"> 把 pm2 的 web 查看弄好
