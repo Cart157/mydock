@@ -22,7 +22,7 @@
 
 6. pm2 的配置文件，放在 www 下，可以配置多个站点
 
-7. 如果放在外网，**记得在 docker-compose.yml 里修改密码**，还有最好不要把 db 和 redis 的端口映射出去，通过 workspace 的 ssh 连接它们
+7. 如果放在外网，**记得在 docker-compose.yml 里修改密码（否则：redis会是redis.conf文件里配置的mydock123!@#，pgsql会是空密码只能在docker内访问，ssh的默认密码会是mydock123!@#）**，还有最好不要把 db 和 redis 的端口映射出去，通过 workspace 的 ssh 连接它们。
 
 
 ### 用法：
