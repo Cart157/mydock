@@ -5,12 +5,10 @@
 + 数据库： pgsql 10.5
 + 内存数据库：redis 3.2
 
-以上全部使用 alpine 构建
-
 
 ### 说明：为了极速部署，没有build，只有镜像
 
-1. 现在镜像使用的是 aliyun 北京服务器，以后稳定了会同步到 docker 官方，使国外服务器也能很快 pull 下来
+1. 以上全部使用 alpine 构建，现在镜像使用的是 aliyun 北京服务器，以后稳定了会同步到 docker 官方，使国外服务器也能很快 pull 下来
 
 2. workspace 有两版：
     1. 默认版只有 crond，没有 pm2，如需执行队列任务需要另外启动 worker
@@ -19,6 +17,7 @@
 3. 保留 mariadb 和 mysql 给有需要的人
 
 4. 站点配置，在 `caddy/conf/vhost` 里，复制一份 gutfan.com.conf，改名字，改里面的域名，重启 caddy 使之生效
+    网站都应该放在宿主机的 `/data/www` 下，用域名区分，`/data/www` 会被挂载到容器里，日志会被放在 `/data/logs` 里，持久化数据放在了 `/data/.mydock` 里
 
 5. 权限说明：php使用的官方镜像作为基础，使用 `www-data` 用户运行，gid和uid都是82，所以网站的根目录应该 `chown -R 82:82 path` path指的是网站的目录
 
