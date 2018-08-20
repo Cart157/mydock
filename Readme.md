@@ -13,10 +13,10 @@
 
 ### TODO
 
-- [ ] 把 mysql 换成 alpine 版的 mariadb 10 （相当于 mysql 5.7）
-- [ ] 把 pgsql 弄好
+- [ ] 注掉 mysql 换成 alpine 版的 mariadb 10 （相当于 mysql 5.7，因为 mysql 不能在 alpine 下编译，一个镜像400M太大了）
+- [ ] 把 pgsql 弄好，测通
 - [ ] 把 ssh mysql pgsql redis 的密码都统一放在 docker-compose.yml 里设置
-- [ ] 把 pm2 的 web 查看弄好
+- [ ] 把 pm2 的 web 查看弄好，测通后删掉 worker 的 ssh
 
 ### 备用
 
