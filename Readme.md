@@ -123,5 +123,6 @@ $ service iptables restart
 - [X] 注掉 mysql 换成 alpine 版的 mariadb 10 （相当于 mysql 5.7，因为 mysql 不能在 alpine 下编译，一个镜像400M太大了）
 - [X] 把 pgsql 弄好，测通
 - [X] 把 ssh mysql pgsql redis 的密码都统一放在 docker-compose.yml 里设置
-- [ ] 把 pm2 的 web 查看弄好，测通后删掉 worker 的 ssh（这个还是继续使用ssh，因为这个 web 只是个 api，而且返回值会暴露系统环境变量，非常危险）
+- [ ] ~~把 pm2 的 web 查看弄好，测通后删掉 worker 的 ssh（这个还是继续使用ssh，因为这个 web 只是个 api，而且返回值会暴露系统环境变量，非常危险）~~
 - [ ] 把 redis 更换成 4.0 版
+- [ ] 为 php 的 gd 库添加 jpeg 支持
