@@ -22,6 +22,20 @@ services:
         - frontend
         - backend
 
+    workspace-pm2:
+      image: registry.cn-beijing.aliyuncs.com/fanybook/workspace:pm2
+      restart: always
+      environment:
+        - SSH_ROOT_PWD=mydock123!@#
+      volumes:
+        - /data/www:/var/www
+        - ./workspace/crontab/www-data:/etc/crontabs/www-data
+      ports:
+        - "2222:22"
+      networks:
+        - frontend
+        - backend
+
 
 ### PHP-FPM ##############################################
     php-fpm:

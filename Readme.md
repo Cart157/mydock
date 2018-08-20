@@ -14,7 +14,7 @@
     1. 默认版只有 crond，没有 pm2，如需执行队列任务需要另外启动 worker
     2. workspace-pm2版，同时带有 crond 和 pm2。推荐使用第一版（符合 docker 的设计原则），但第二版会节约一些硬盘空间。
 
-3. 保留 mariadb 和 mysql 给有需要的人
+3. 保留 mariadb 和 mysql 给有需要的人，certbot 是为了手动给七牛之类的生成证书的
 
 4. 站点配置，在 `caddy/conf/vhost` 里，复制一份 gutfan.com.conf，改名字，改里面的域名，重启 caddy 使之生效
 
