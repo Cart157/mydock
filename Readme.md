@@ -16,15 +16,13 @@
 
 3. 保留 mariadb 和 mysql 给有需要的人
 
-4. 站点配置，在 `caddy/conf/vhost` 里
+4. 站点配置，在 `caddy/conf/vhost` 里，复制一份 gutfan.com.conf，改名字，改里面的域名，重启 caddy 使之生效
 
 5. 权限说明：php使用的官方镜像作为基础，使用 `www-data` 用户运行，gid和uid都是82，所以网站的根目录应该 `chown -R 82:82 path` path指的是网站的目录
 
-6. pm2 的配置文件，放在 www 下，可以配置多个站点
+6. 如果放在外网，**记得在 docker-compose.yml 里修改密码（否则：redis会是redis.conf文件里配置的mydock123!@#，pgsql会是空密码只能在docker内访问，ssh的默认密码会是mydock123!@#）**，还有最好不要把 db 和 redis 的端口映射出去，通过 workspace 的 ssh 连接它们。
 
-7. 如果放在外网，**记得在 docker-compose.yml 里修改密码（否则：redis会是redis.conf文件里配置的mydock123!@#，pgsql会是空密码只能在docker内访问，ssh的默认密码会是mydock123!@#）**，还有最好不要把 db 和 redis 的端口映射出去，通过 workspace 的 ssh 连接它们。
-
-8. php-worker 的 `pm2process.yml` 为了支持多站点，之前使用 `cwd` 会报错，所以现在删除 `cwd` 使用绝对路径
+7. php-worker 的 `pm2process.yml` 支持多站点，所以放在程序之外，之前使用 `cwd` 会报错，所以现在删除 `cwd` 使用绝对路径。查看程序健康状态，使用 ssh，登入后使用 `su-exec www-data pm2 ls` 查看
 
 
 ### 用法：
@@ -126,3 +124,4 @@ $ service iptables restart
 - [X] 把 pgsql 弄好，测通
 - [X] 把 ssh mysql pgsql redis 的密码都统一放在 docker-compose.yml 里设置
 - [ ] 把 pm2 的 web 查看弄好，测通后删掉 worker 的 ssh（这个还是继续使用ssh，因为这个 web 只是个 api，而且返回值会暴露系统环境变量，非常危险）
+- [ ] 把 redis 更换成 4.0 版
