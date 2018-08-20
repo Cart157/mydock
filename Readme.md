@@ -8,13 +8,19 @@
 
 ### 说明：为了极速部署，没有build，只有镜像
 
-现在镜像使用的是 aliyun 北京服务器，以后稳定了会同步到 docker 官方，使国外服务器也能很快 pull 下来
+1. 现在镜像使用的是 aliyun 北京服务器，以后稳定了会同步到 docker 官方，使国外服务器也能很快 pull 下来
 
-workspace 有两版：
-1. 默认版只有 crond，没有 pm2，如需执行队列任务需要另外启动 worker
-2. workspace-pm2版，同时带有 crond 和 pm2。推荐使用第一版（符合 docker 的设计原则），但第二版会节约一些硬盘空间。
+2. workspace 有两版：
+    1. 默认版只有 crond，没有 pm2，如需执行队列任务需要另外启动 worker
+    2. workspace-pm2版，同时带有 crond 和 pm2。推荐使用第一版（符合 docker 的设计原则），但第二版会节约一些硬盘空间。
 
-保留 mariadb 和 mysql 给有需要的人
+3. 保留 mariadb 和 mysql 给有需要的人
+
+4. 站点配置，在 `caddy/conf/vhost` 里
+
+5. 权限说明：php使用的官方镜像作为基础，使用 `www-data` 用户运行，gid和uid都是82，所以网站的根目录应该 `chown -R 82:82 path` path指的是网站的目录
+
+6. pm2 的配置文件，放在 www 下，可以配置多个站点
 
 
 ### 用法：
