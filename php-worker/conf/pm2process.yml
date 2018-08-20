@@ -17,13 +17,13 @@
 apps:
   - name: laravel-gutfan-queue-worker
     interpreter: php
-    script: artisan
+    script: '/var/www/gutfan.com/web/artisan'
     exec_mode: fork
     instances: 2
-    cwd: '/var/www/gutfan.com/web/'
+#    cwd: '/var/www/gutfan.com/web/'
     watch:
-      - './app/Jobs/**'
-      - './.env'
+      - '/var/www/gutfan.com/web/app/Jobs/**'
+      - '/var/www/gutfan.com/web/.env'
     args:
       - queue:work
       - --sleep=1

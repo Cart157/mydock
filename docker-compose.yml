@@ -44,7 +44,7 @@ services:
       volumes:
         - /data/www:/var/www
         - /data/logs/pm2:/home/www-data/.pm2/logs
-        - ./php-worker/conf/pm2process.yml:/var/www/pm2process.yml
+        - ./php-worker/conf/pm2process.yml:/etc/pm2/pm2process.yml
       ports:
         - "2223:22"
       networks:

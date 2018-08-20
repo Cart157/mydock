@@ -24,6 +24,8 @@
 
 7. 如果放在外网，**记得在 docker-compose.yml 里修改密码（否则：redis会是redis.conf文件里配置的mydock123!@#，pgsql会是空密码只能在docker内访问，ssh的默认密码会是mydock123!@#）**，还有最好不要把 db 和 redis 的端口映射出去，通过 workspace 的 ssh 连接它们。
 
+8. php-worker 的 `pm2process.yml` 为了支持多站点，之前使用 `cwd` 会报错，所以现在删除 `cwd` 使用绝对路径
+
 
 ### 用法：
 
@@ -122,5 +124,5 @@ $ service iptables restart
 
 - [X] 注掉 mysql 换成 alpine 版的 mariadb 10 （相当于 mysql 5.7，因为 mysql 不能在 alpine 下编译，一个镜像400M太大了）
 - [X] 把 pgsql 弄好，测通
-- [ ] 把 ssh mysql pgsql redis 的密码都统一放在 docker-compose.yml 里设置
-- [ ] 把 pm2 的 web 查看弄好，测通后删掉 worker 的 ssh
+- [X] 把 ssh mysql pgsql redis 的密码都统一放在 docker-compose.yml 里设置
+- [ ] 把 pm2 的 web 查看弄好，测通后删掉 worker 的 ssh（这个还是继续使用ssh，因为这个 web 只是个 api，而且返回值会暴露系统环境变量，非常危险）
