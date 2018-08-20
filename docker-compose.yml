@@ -46,19 +46,43 @@ services:
 
 
 ### Mysql ##############################################
-    mysql:
-      image: mysql:5.7
-      environment:
-        - MYSQL_ROOT_PASSWORD=mydock123!@#
-        - MYSQL_DATABASE=gitea
-        - MYSQL_USER=gitea
-        - MYSQL_PASSWORD=gitea
+    # mysql:
+    #   image: mysql:5.7
+    #   restart: always
+    #   environment:
+    #     - MYSQL_ROOT_PASSWORD=mydock123!@#
+    #     - MYSQL_DATABASE=gitea
+    #     - MYSQL_USER=gitea
+    #     - MYSQL_PASSWORD=gitea
+    #   volumes:
+    #     - /data/.mydock/mysql:/var/lib/mysql
+    #   networks:
+    #     - backend
+
+    mariadb:
+      image: registry.cn-beijing.aliyuncs.com/fanybook/mariadb
       restart: always
+      environment:
+        - MYSQL_ROOT_PWD=mydock123!@#
+      ports:
+        - "3306:3306"
       volumes:
-        - /data/.mydock/mysql:/var/lib/mysql
+        - /data/.mydock/mariadb:/var/lib/mysql
       networks:
         - backend
 
+### Pgsql ##############################################
+    postgres:
+      image: registry.cn-beijing.aliyuncs.com/fanybook/postgres
+      restart: always
+      environment:
+        - POSTGRES_PASSWORD=mydock123!@#
+      ports:
+        - "5432:5432"
+      volumes:
+        - /data/.mydock/postgres:/var/lib/postgresql/data
+      networks:
+        - backend
 
 ### Redis ################################################
     redis:
@@ -106,11 +130,11 @@ services:
 ### Gitea ################################################
   gitea:
     image: gitea/gitea:1.5
+    restart: always
     volumes:
-      - ./data/gitea:/data
+      - /data/.mydock/gitea:/data
     ports:
       - "30000:3000"
       - "22222:22"
-    depends_on:
-      - db
-    restart: always
+    # depends_on:
+    #   - postgres
