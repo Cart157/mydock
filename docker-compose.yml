@@ -11,6 +11,8 @@ services:
     workspace:
       image: registry.cn-beijing.aliyuncs.com/fanybook/workspace
       restart: always
+      environment:
+        - SSH_ROOT_PWD=mydock123!@#
       volumes:
         - /data/www:/var/www
         - ./workspace/crontab/www-data:/etc/crontabs/www-data
@@ -37,6 +39,8 @@ services:
     php-worker:
       image: registry.cn-beijing.aliyuncs.com/fanybook/php-worker
       restart: always
+      environment:
+        - SSH_ROOT_PWD=mydock123!@#
       volumes:
         - /data/www:/var/www
         - /data/logs/pm2:/home/www-data/.pm2/logs
@@ -88,6 +92,8 @@ services:
     redis:
       image: registry.cn-beijing.aliyuncs.com/fanybook/redis
       restart: always
+      environment:
+        - REDIS_PASSWORD=mydock123!@#
       command: redis-server /etc/redis/redis.conf
       volumes:
         - /data/.mydock/redis:/data
