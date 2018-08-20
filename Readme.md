@@ -11,9 +11,46 @@ workspace 有两版：
 2. workspace-pm2，同时带有 crond 和 pm2。推荐使用第一版，第二版会节省一些硬盘空间。
 
 
-### 为了极速部署，没有build，只有镜像
+### 说明：为了极速部署，没有build，只有镜像
 
 现在镜像使用的是 aliyun 北京服务器，以后稳定了会同步到 docker 官方，使国外服务器也能很快 pull 下来
+
+
+### 用法：
+
+CentOS: 安装 docker-ce
+```
+setp1: 先删除系统中原有的 docker（请谨慎，如果不想删原有的）
+-------------------------------------------------------------
+$ sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-selinux \
+                  docker-engine-selinux \
+                  docker-engine
+
+
+setp2: 安装 docker-ce 的仓库
+-------------------------------------------------------------
+$ sudo yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2
+
+$ sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+
+
+setp3: 安装 docker-ce
+-------------------------------------------------------------
+$ sudo yum install docker-ce
+```
+
+Ubuntu: 安装 docker-ce
 
 
 ### TODO
