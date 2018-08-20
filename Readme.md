@@ -12,6 +12,6 @@
 
 ## TODO
 
-[X] 把 mysql 换成 alpine 版的 mariadb 10 （相当于 mysql 5.7）
-[X] 把 pgsql 弄好
-[X] 把 pm2 的 web 查看弄好
+\[X] 把 mysql 换成 alpine 版的 mariadb 10 （相当于 mysql 5.7）
+\[X] 把 pgsql 弄好
+\[X] 把 pm2 的 web 查看弄好
