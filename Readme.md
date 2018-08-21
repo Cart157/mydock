@@ -3,7 +3,7 @@
 + 服务器：caddy
 + 代码解释器：php 7.1 （workspace, fpm, worker）
 + 数据库： pgsql 10.5
-+ 内存数据库：redis 3.2
++ 内存数据库：redis 4.0
 
 
 ### 说明：为了极速部署，没有build，只有镜像
@@ -87,7 +87,8 @@ https://docs.docker.com/compose/install/
 
 1. 先下载 `git clone https://github.com/Cart157/mydock.git`
 2. `cd mydock`
-3. `docker-compose up -d caddy pgsql redis`，因为 caddy 会依赖 `php-fpm`，所以 `php-fpm` 和 `workspace` 会被自动启动，`pgsql redis worker` 等请按需启动
+3. 先去 `docker-compose.yml` 里修改密码（外网的话），然后改下 `caddy 配置里的站点 path`、`workspace 里计划任务的 path` 和 `worker 里 pm2 配置文件的 path`
+4. `docker-compose up -d caddy pgsql redis`，因为 caddy 会依赖 `php-fpm`，所以 `php-fpm` 和 `workspace` 会被自动启动，`pgsql redis worker` 等请按需启动
 
 
 ### 打开防火墙的端口
@@ -126,5 +127,6 @@ $ service iptables restart
 - [X] 把 pgsql 弄好，测通
 - [X] 把 ssh mysql pgsql redis 的密码都统一放在 docker-compose.yml 里设置
 - [ ] ~~把 pm2 的 web 查看弄好，测通后删掉 worker 的 ssh（这个还是继续使用ssh，因为这个 web 只是个 api，而且返回值会暴露系统环境变量，非常危险）~~
-- [ ] 把 redis 更换成 4.0 版
-- [ ] 为 php 的 gd 库添加 jpeg 支持
+- [X] 把 redis 更换成 4.0 版
+- [X] 为 php 的 gd 库添加 jpeg 支持
+- [X] 为 php 添加 pdo_pgsql 用来支持 postgres (pgsql)
