@@ -2,7 +2,7 @@
 
 + 服务器：caddy
 + 代码解释器：php 7.1 （workspace, fpm, worker）
-+ 数据库： pgsql 10.5
++ 数据库： pgsql 10.5 （如需使用postgis，compose里，镜像面加 `:postgis`）
 + 内存数据库：redis 4.0
 
 
@@ -131,3 +131,4 @@ $ service iptables restart
 - [X] 为 php 的 gd 库添加 jpeg 支持
 - [X] 为 php 添加 pdo_pgsql 用来支持 postgres (pgsql)
 - [X] 为所有镜像的（alpine）添加 `ll` 命令，效仿 centos
+- [X] 为 postgres 增加 postgis
