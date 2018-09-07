@@ -118,6 +118,23 @@ services:
       - backend
 
 
+### ElasticSearch ################################################
+  elasticsearch:
+    image: blacktop/elasticsearch:6.4.0
+    restart: always
+    environment:
+      - ES_JAVA_OPTS=-Xms2g -Xmx2g
+    volumes:
+      - /data/.mydock/elasticsearch:/usr/share/elasticsearch/data
+      - /data/logs/elasticsearch:/usr/share/elasticsearch/logs
+      - ./elasticsearch/conf:/usr/share/elasticsearch/config
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - backend
+
+
 ### Caddy Server #########################################
   caddy:
     image: registry.cn-beijing.aliyuncs.com/fanybook/caddy

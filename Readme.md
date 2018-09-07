@@ -134,3 +134,5 @@ $ service iptables restart
 - [X] 为 php 添加 pdo_pgsql 用来支持 postgres (pgsql)
 - [X] 为所有镜像的（alpine）添加 `ll` 命令，效仿 centos
 - [X] 为 postgres 增加 postgis
+- [X] 增加了 elasticsearch（使用前先 `sysctl -w vm.max_map_count=262144`）
+- [ ] 为 elasticsearch 增加 ll，然后原装 ik 分词
