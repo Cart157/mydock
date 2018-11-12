@@ -60,7 +60,7 @@ $ yum-config-manager \
 
 setp3: 安装 docker-ce
 -------------------------------------------------------------
-$ yum install docker-ce
+$ yum install -y docker-ce
 
 
 setp4: 启动服务
