@@ -57,6 +57,10 @@ $ yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
 
+备注：国内源
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+   
+
 
 setp3: 安装 docker-ce
 -------------------------------------------------------------
