@@ -77,18 +77,19 @@ services:
   #     - /data/.mydock/mysql:/var/lib/mysql
   #   networks:
   #     - backend
+  #
+  # mariadb:
+  #   image: registry.cn-beijing.aliyuncs.com/fanybook/mariadb
+  #   restart: always
+  #   environment:
+  #     - MYSQL_ROOT_PWD=mydock123!@#
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - /data/.mydock/mariadb:/var/lib/mysql
+  #   networks:
+  #     - backend
 
-  mariadb:
-    image: registry.cn-beijing.aliyuncs.com/fanybook/mariadb
-    restart: always
-    environment:
-      - MYSQL_ROOT_PWD=mydock123!@#
-    ports:
-      - "3306:3306"
-    volumes:
-      - /data/.mydock/mariadb:/var/lib/mysql
-    networks:
-      - backend
 
 ### Pgsql ##############################################
   postgres:
